@@ -1,0 +1,29 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    
+    <!-- Colores de Background -->
+    <Color x:Key="PrimarioBackColor1">White</Color>
+    <Color x:Key="PrimarioBackColor2">#FFCACDFF</Color>
+    <Color x:Key="SecundarioBackColor1">#FF192C5F</Color>
+    <Color x:Key="SecundarioBackColor2">#FF101A43</Color>
+    <Color x:Key="TerciarioBackColor1">#FF101A43</Color>
+    <Color x:Key="TerciarioBackColor2">#FF101A43</Color>
+
+
+    <!-- Texto -->
+    <SolidColorBrush x:Key="color1" Color="AliceBlue"/>
+    
+    <!-- Colores Botones -->
+
+    <!-- Texto -->
+
+    <SolidColorBrush x:Key="textoPlanoColor1" Color="AliceBlue"/>
+
+    <!-- Colores Panel -->
+    <SolidColorBrush x:Key="panelsobreColorBarra" Color="#FFCEC4EB"/>
+    <SolidColorBrush x:Key="panelSobreColor" Color="#FF203A6D"/>
+    <SolidColorBrush x:Key="panelActivoColor" Color="#FF0B172D"/>
+
+
+
+</ResourceDictionary>
