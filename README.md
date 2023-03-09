@@ -1,55 +1,61 @@
 # Sistema-Gestion-Prestamos
-Proyecto de la clase Desarrollo de Software
+El sistema de gestión de préstamos es una aplicación de escritorio diseñada para facilitar el proceso de administración de préstamos y cobranzas. El sistema está diseñado para ser utilizado por una persona o empleado responsable de ingresar los datos de los clientes, los préstamos y las cobranzas en el sistema.
+
+La interfaz de usuario del sistema es intuitiva y fácil de usar, con un menú principal que contiene varias opciones, incluyendo préstamos, cobranzas, mantenimiento, seguridad, reportes y configuración. Dentro de cada opción, se proporcionan submenús que permiten al usuario realizar una variedad de tareas, como realizar préstamos, realizar cobranzas, realizar mantenimiento de moneda y tipo de préstamo, y generar informes.
+
+El sistema está diseñado para ser seguro y confiable, con una funcionalidad de seguridad que permite al usuario crear y administrar cuentas de usuario. Además, la aplicación está diseñada para ser fácil de mantener y actualizar, con una opción de configuración que permite al usuario personalizar la aplicación para satisfacer sus necesidades específicas.
+
+## Características del sisema
+El sistema de gestión de préstamos incluye los siguientes modulos y submodulos:
+
+### Préstamos
+- Realizar préstamo: los usuarios pueden solicitar un préstamo a través de la plataforma, indicando el monto y el plazo deseado.
+- Listado préstamos: los administradores pueden ver el listado completo de los préstamos solicitados, incluyendo información sobre los clientes, montos y plazos.
+### Cobranzas
+- Realizar cobranza: los administradores pueden registrar el pago de las cuotas de los préstamos.
+- Listado cobranzas: los administradores pueden ver el listado completo de las cobranzas realizadas, incluyendo información sobre los clientes, montos y fechas de pago.
+### Mantenimiento
+- Moneda: los administradores pueden agregar, editar o eliminar tipos de moneda.
+- Tipo de préstamo: los administradores pueden agregar, editar o eliminar tipos de préstamos.
+### Seguridad
+Usuario: los administradores pueden crear, editar o eliminar usuarios y asignarles permisos.
+### Reportes
+- Reporte entre fechas: los administradores pueden generar un informe de préstamos y pagos entre dos fechas determinadas.
+- Reporte resumen global: los administradores pueden generar un informe de resumen de préstamos y pagos, mostrando los montos totales.
+- Reporte global por cliente: los administradores pueden generar un informe de préstamos y pagos de un cliente específico.
+- Reporte todos los pagos: los administradores pueden generar un informe de todos los pagos realizados en un período determinado.
+- Reporte clientes: los administradores pueden generar un informe de clientes y sus préstamos pendientes.
+### Configuración
+- Configuración: los administradores pueden configurar el sistema, incluyendo la información de la empresa, la configuración de correo electrónico y otras opciones.
+
+## Tecnologías utilizadas
+El sistema se desarrollará utilizando las siguientes tecnologías:
+
+- Lenguaje de programación: C#
+- Framework: WPF
+- Base de datos: MySQL
+- Control de versiones: Git
+- Hosting: AWS
 
 ## Requisitos
 - Visual Studio 2022
 - Aplicación de WPF (.NET Framework) versión 4.8
-
-## Metodo de Trabajo
-Se trabaja utilizando el metodo MVVM. El cual es un patrón arquitectónico de software que se utiliza comúnmente en el desarrollo de
-aplicaciones de software para separar la lógica de la interfaz de usuario (UI) de la lógica del negocio y los datos subyacentes.
-
-El patrón MVVM consta de tres componentes principales:
-
-- Modelo (Model): representa los datos y la lógica del negocio subyacente, como la validación de datos, el acceso a bases de datos y la manipulación de datos.
-- Vista (View): representa la interfaz de usuario (UI) que se muestra al usuario final y es responsable de la presentación de los datos y la interacción del usuario.
-- ViewModel: actúa como un intermediario entre la Vista y el Modelo, y es responsable de realizar la lógica de presentación y manipulación de datos necesaria para la
-Vista. También se encarga de manejar eventos y comandos de la Vista y actualizar el Modelo en consecuencia.
-
-### ¿Por qué MVVM?
-
-El patrón MVVM permite una separación clara de las responsabilidades en una aplicación de software, lo que facilita la escalabilidad, el mantenimiento y la colaboración
-en el desarrollo del software. Además, MVVM también permite pruebas unitarias más efectivas y mejora la reutilización de código en diferentes partes de la aplicación.
-
-## Metodología
- Se debe trabajar con las carpetas correspondientes a cada componente. 
- - Para vistas se utiliza el elemento user control
- - Para ViewModel se utiliza el elemento clase
  
- Aqui la ventana en donde se encuentran los elementos:
+ ## Contribución
+ Para contribuir sigue estos pasos:
  
- ![Ventana de selección de elementos](Assets/SelecElemento.png)
+ 1. Crea un fork de este repositorio
+ 2. Crea una nueva rama con el nombre de tu función o característica
+ 3. Realiza los cambios necearios
+ 4. Crea un pull request hacia la rama pincipal de este repositorio
  
- ### Vistas o Views
- Los modulos y submodulos se desarrollan dentro **carpeta vista**, la cual es para vistas.
- Las vistas se crean utilizando el elemento **user control**.
+ Para una guía mas detallada revise la documentación.
  
- ![Carpeta vistas](Assets/metodología.png)
+ ## Créditos
+ Iconos: 
+ Flaticon https://www.flaticon.es/
  
- ### ViewModel
- Se desarrollan dentro de la carpeta ViewModel. Los viewmodels se crean utilizando el elemento **Clases**.
- 
- ![Carpeta ViewModel](Assets/ViewModel.png)
- 
-  ### Model
- Se desarrollan dentro de la carpeta Model.
- 
- ![Carpeta Model](Assets/Modelo.png)
- 
- ### Ubicación gráfica de las vistas
- Las vistas irán detro de la tercera fila del grid, como se muestra en a continuación:
- 
- ![Ubicación/tamaño de vistas](Assets/TerceraFilaGrid.png)
- 
+ Ilustraciones:
+ unDraw https://undraw.co/
  
  
