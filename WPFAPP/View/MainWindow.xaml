@@ -1,0 +1,534 @@
+﻿<Window x:Class="WPFAPP.View.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WPFAPP.View"
+        xmlns:viewModel="clr-namespace:WPFAPP.ViewModels"
+        mc:Ignorable="d"
+        WindowStartupLocation="CenterScreen"
+        WindowStyle="None"
+        Title="Login" Height="600" Width="1100"
+         MouseDown="Window_MouseDown">
+    <Window.DataContext>
+        <viewModel:MainViewModel/>
+    </Window.DataContext>
+
+    <Window.Resources>
+        <DataTemplate DataType="{x:Type viewModel:InicioViewModel}">
+            <local:InicioView/>
+        </DataTemplate>
+
+        <DataTemplate DataType="{x:Type viewModel:PrestamosViewModel}">
+            <local:PrestamosView/>
+        </DataTemplate>
+    </Window.Resources>
+
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <!--Columna de Navegación-->
+        <Grid Grid.Column="0" x:Name="nav_pnl" >
+            <Grid.Background>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                    <GradientStop Color="#363F4B" Offset="0"/>
+                    <GradientStop Color="#28303B" Offset="0.9"/>
+                </LinearGradientBrush>
+            </Grid.Background>
+
+            <StackPanel x:Name="st_pnl">
+
+                <Grid>
+
+                    <!--// Menu title text //-->
+
+                    <TextBlock  Grid.Row="1"
+                                    Grid.Column="0"
+                                    Margin="50,25,0,25"
+                                    Text="Menu"
+                                    Foreground="White"
+                                    FontSize="16"
+                                    Background="Transparent"
+                                    HorizontalAlignment="Left"
+                                    VerticalAlignment="Center">
+                            
+                            <!--// Shadow Effect //-->
+
+                        <TextBlock.Effect>
+
+                            <DropShadowEffect  BlurRadius="50"
+                                                   ShadowDepth="1"
+                                                   Direction="-90"
+                                                   Color="White"/>
+
+                        </TextBlock.Effect>
+
+                    </TextBlock>
+
+                    <ToggleButton x:Name="Tg_Btn"
+                              Width="24" 
+                              Height="24" 
+                              HorizontalAlignment="Left"
+                              Margin="10 25 0 25"
+                              Style="{StaticResource tb_style}" 
+                                  Unchecked="Tg_Btn_Unchecked" 
+                                  Checked="Tg_Btn_Checked">
+
+                        <ToggleButton.Background>
+                            <ImageBrush x:Name="img_bg"
+                                ImageSource="/Recursos/menuIcono.png"
+                                    Stretch="None"/>
+                        </ToggleButton.Background>
+
+                        <ToggleButton.Triggers>
+                            <EventTrigger RoutedEvent="ToggleButton.Checked">
+
+                                <BeginStoryboard>
+                                    <Storyboard x:Name="HideStackPanel">
+                                        <DoubleAnimation Storyboard.TargetName="nav_pnl"
+                                                     Storyboard.TargetProperty="Width"
+                                                     BeginTime="0:0:0"
+                                                     From="230" To="50"
+                                                     Duration="0:0:0.2"/>
+                                    </Storyboard>
+                                </BeginStoryboard>
+
+                            </EventTrigger>
+
+                            <EventTrigger RoutedEvent="ToggleButton.Unchecked">
+                                <BeginStoryboard>
+
+                                    <Storyboard x:Name="ShowStackPanel">
+
+                                        <DoubleAnimation
+                                                
+                                                Storyboard.TargetName="nav_pnl"
+                                                Storyboard.TargetProperty="Width"
+                                                BeginTime="0:0:0"
+                                                From="50" To="230"
+                                                Duration="0:0:0.3">
+
+                                        </DoubleAnimation>
+
+                                    </Storyboard>
+
+                                </BeginStoryboard>
+                            </EventTrigger>
+                        </ToggleButton.Triggers>
+                    </ToggleButton>
+
+                    <Rectangle VerticalAlignment="Bottom" 
+                               Width="200" Height="1" 
+                               Fill="#FF5B5B67" 
+                               
+                               />
+
+                </Grid>
+
+
+
+
+                <!--Menu de navegación-->
+                <Menu HorizontalAlignment="Left" Background="Transparent" Margin="0 40 0 0">
+
+                    <Menu.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <VirtualizingStackPanel Orientation="Vertical"/>
+                        </ItemsPanelTemplate>
+                    </Menu.ItemsPanel>
+
+
+                    <!--// Main Menu - Home //-->
+
+                    <MenuItem Header="Inicio"
+                              MouseEnter="ListViewItem_MouseEnter"
+                              Command="{Binding ShowInicioViewCommand}"
+                              Template="{StaticResource Menu_Template}" >
+
+                        <MenuItem.Icon>
+
+                            <Image Source="/Recursos/hogar.png"
+                               Stretch="None" />
+
+                        </MenuItem.Icon>
+
+                        <MenuItem.ToolTip>
+                            <ToolTip x:Name="tt_Inicio"
+                                         Content="Inicio"
+                                     Style="{StaticResource tt_style}"/>
+                        </MenuItem.ToolTip>
+
+                    </MenuItem>
+
+                    <!--// Main Menu - Préstamos //-->
+
+                    <MenuItem Header="Préstamos"
+                              
+                          Template="{StaticResource Menu_SubMenu_Template}">
+
+
+                        <MenuItem.Icon>
+
+                            <Image Source="/Recursos/prestamos.png"
+                               Stretch="None" />
+
+                        </MenuItem.Icon>
+
+                        <MenuItem.ToolTip>
+                            <ToolTip x:Name="tt_Préstamos"
+                                         Content="Préstamos"
+                                     Style="{StaticResource tt_style}"/>
+                        </MenuItem.ToolTip>
+
+                        <!--// Préstamos Submenu - //-->
+
+                        <MenuItem x:Name="mnItem_Préstamos"
+                                  Header="Realizar Préstamos"
+                                  Command="{Binding ShowPrestamosViewCommand}"
+                                  Template="{StaticResource Item_Template}">
+
+
+                        </MenuItem>
+
+                        <!--// Préstamos Submenu -//-->
+
+                        <MenuItem x:Name="mnItem_Préstamos2" 
+                                  Header="Listado Préstamos"
+                                  Template="{StaticResource Item_Template}">
+
+
+                        </MenuItem>
+
+
+                    </MenuItem>
+
+                    <!--// Main Menu - Cobranzas //-->
+
+                    <MenuItem Header="Cobranzas"
+                          Template="{StaticResource Menu_SubMenu_Template}">
+
+                        <MenuItem.Icon>
+
+                            <Image Source="/Recursos/tarjeta-de-credito.png"
+                               Stretch="None" />
+
+                        </MenuItem.Icon>
+
+                        <MenuItem.ToolTip>
+                            <ToolTip x:Name="tt_Cobranzas"
+                                         Content="Cobranzas"
+                                     Style="{StaticResource tt_style}"/>
+                        </MenuItem.ToolTip>
+
+
+                        <!--// Cobranza Submenu - //-->
+
+                        <MenuItem Header="Realizar Cobranza"
+                              Template="{StaticResource Item_Template}">
+
+
+                        </MenuItem>
+
+                        <!--// Cobranza Submenu -//-->
+
+                        <MenuItem Header="Listado Cobranza"
+                              Template="{StaticResource Item_Template}">
+
+                        </MenuItem>
+
+                    </MenuItem>
+
+                    <!--// Main Menu - Mantenimiento //-->
+
+                    <MenuItem Header="Mantenimiento"
+                          Template="{StaticResource Menu_SubMenu_Template}">
+
+                        <MenuItem.Icon>
+
+                            <Image Source="/Recursos/expandir.png"
+                               Stretch="None" />
+
+                        </MenuItem.Icon>
+
+                        <MenuItem.ToolTip>
+                            <ToolTip x:Name="tt_Manten"
+                                         Content="Mantenimiento"
+                                     Style="{StaticResource tt_style}"/>
+                        </MenuItem.ToolTip>
+
+                        <!--// Mantenimiento Submenu - //-->
+
+                        <MenuItem Header="Mondea"
+                              Template="{StaticResource Item_Template}">
+
+
+                        </MenuItem>
+
+                        <!--// Mantenimiento Submenu -//-->
+
+                        <MenuItem Header="Tipo de préstamo"
+                              Template="{StaticResource Item_Template}">
+
+                        </MenuItem>
+
+                    </MenuItem>
+
+                    <!--// Main Menu - Seguridad //-->
+
+                    <MenuItem Header="Seguridad"
+                          Template="{StaticResource Menu_SubMenu_Template}">
+
+                        <MenuItem.Icon>
+
+                            <Image Source="/Recursos/blindaje.png"
+                               Stretch="None" />
+
+                        </MenuItem.Icon>
+
+                        <MenuItem.ToolTip>
+                            <ToolTip x:Name="tt_Seguridad"
+                                         Content="Seguridad"
+                                     Style="{StaticResource tt_style}"/>
+                        </MenuItem.ToolTip>
+
+                        <!--// Seguridad Submenu -//-->
+
+                        <MenuItem Header="Usuario"
+                              Template="{StaticResource Item_Template}">
+
+                        </MenuItem>
+
+                    </MenuItem>
+
+                    <!--// Main Menu - Reportes //-->
+
+                    <MenuItem Header="Reportes"
+                          Template="{StaticResource Menu_SubMenu_Template}">
+
+                        <MenuItem.Icon>
+
+                            <Image Source="/Recursos/documento-firmado.png"
+                               Stretch="None" />
+
+                        </MenuItem.Icon>
+
+                        <MenuItem.ToolTip>
+                            <ToolTip x:Name="tt_Reportes"
+                                         Content="Reportes"
+                                     Style="{StaticResource tt_style}"/>
+                        </MenuItem.ToolTip>
+
+
+                        <!--// Reportes Submenu -//-->
+
+                        <MenuItem Header="R. Entre Fechas"
+                              Template="{StaticResource Item_Template}">
+
+                        </MenuItem>
+
+                        <MenuItem Header="R. Resumen Global"
+                              Template="{StaticResource Item_Template}">
+
+                        </MenuItem>
+
+                        <MenuItem Header="R. Global x Cliente"
+                              Template="{StaticResource Item_Template}">
+
+                        </MenuItem>
+
+                        <MenuItem Header="R. Todos los Pagos"
+                              Template="{StaticResource Item_Template}">
+
+                        </MenuItem>
+
+                        <MenuItem Header="R. Clientes"
+                              Template="{StaticResource Item_Template}">
+
+                        </MenuItem>
+
+
+
+                    </MenuItem>
+
+                    <!--// Main Menu - Configuración //-->
+
+                    <MenuItem Header="Configuración"
+                          Template="{StaticResource Menu_SubMenu_Template}">
+
+                        <MenuItem.Icon>
+
+                            <Image Source="/Recursos/ajustes.png"
+                               Stretch="None" />
+
+                        </MenuItem.Icon>
+
+                        <MenuItem.ToolTip>
+                            <ToolTip x:Name="tt_Config"
+                                         Content="Configuración"
+                                     Style="{StaticResource tt_style}"/>
+                        </MenuItem.ToolTip>
+
+                        <!--// Settings Submenu - Input / Codecs //-->
+
+                        <MenuItem Header="Pendiente"
+                              Template="{StaticResource Item_Template}">
+
+
+                        </MenuItem>
+
+
+
+                    </MenuItem>
+
+
+                </Menu>
+            </StackPanel>
+
+
+
+
+        </Grid>
+
+        <!--Columna de Contenido-->
+        <Grid Grid.Column="1">
+            <Grid.Background>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                    <GradientStop Color="#BEC2C8" Offset="0"/>
+                    <GradientStop Color="#A9AFB6" Offset="1"/>
+                </LinearGradientBrush>
+            </Grid.Background>
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="*" MaxHeight="40" MinHeight="20"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+
+            <StackPanel Grid.Row="0" HorizontalAlignment="Right" 
+                        Orientation="Horizontal"
+                        FlowDirection="RightToLeft"
+                        >
+
+                <Button x:Name="btnCerrar"
+                        Style="{StaticResource ControlBoton}"
+                        Click="btnCerrar_Click" 
+                        
+                        
+                        >
+
+                    <Image Source="/Recursos/cruzNegra.png" 
+                           Style="{StaticResource controlBtnIcono}"/>
+                </Button>
+
+                <Button x:Name="btnMax"
+                        Style="{StaticResource ControlBoton}"
+                        Click="btnMax_Click" 
+                        
+                        >
+
+                    <Image Source="/Recursos/Maximizar.png" 
+                           Style="{StaticResource controlBtnIcono}"/>
+                </Button>
+
+                <Button x:Name="btnMin"
+                        Style="{StaticResource ControlBoton}"
+                        Click="btnMin_Click" 
+                         >
+
+                    <Image Source="/Recursos/menosNegro.png" 
+                           Style="{StaticResource controlBtnIcono}"/>
+                </Button>
+
+
+            </StackPanel>
+
+
+
+
+            <Grid Grid.Row="1" >
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="145*"/>
+                    <ColumnDefinition Width="141*"/>
+                    <ColumnDefinition Width="4*"/>
+                </Grid.ColumnDefinitions>
+
+                <StackPanel Grid.Column="0"
+                                    Orientation="Horizontal"
+                                    VerticalAlignment="Center">
+
+
+
+                    <TextBlock Text="{Binding Caption}"
+                                       Foreground="Black"
+                                       FontSize="16"
+                                       FontWeight="Medium"
+                                       VerticalAlignment="Center"
+                                       Margin="20 0 0 0"/>
+
+                </StackPanel>
+
+                <StackPanel Grid.Column="1"
+                                    Orientation="Horizontal"
+                                    FlowDirection="RightToLeft"
+                                    VerticalAlignment="Center"
+                                    Margin="0,0,10,0" Grid.ColumnSpan="2">
+
+                    <Button Style="{StaticResource usuarioBtn}">
+
+                        <Image Source="/Recursos/flecha-abajo.png" 
+                               Style="{StaticResource usuarioBtnIcono}"/>
+
+                    </Button>
+
+                    <TextBlock Text="Usuario"
+                                       Foreground="Black"
+                                       FontSize="14"
+                                       VerticalAlignment="Center"/>
+                    <Ellipse Height="25" Width="25"
+                                     Margin="10 0 10 0">
+                        <Ellipse.Fill>
+                            <ImageBrush ImageSource="/Recursos/usuario.png"/>
+                        </Ellipse.Fill>
+                    </Ellipse>
+
+                    <Button Style="{StaticResource usuarioBtn}">
+
+                        <Image Source="/Recursos/sobre.png" 
+                               Style="{StaticResource usuarioBtnIcono}"/>
+
+                    </Button>
+
+                    <Button Style="{StaticResource usuarioBtn}">
+
+                        <Image Source="/Recursos/campana.png" 
+                               Style="{StaticResource usuarioBtnIcono}"/>
+
+                    </Button>
+
+
+
+
+                </StackPanel>
+
+
+
+            </Grid>
+
+
+
+            <ContentControl Content="{Binding CurrentChildView}"
+                            Grid.Row="2"
+                            Margin="15"/>
+        </Grid>
+
+
+    </Grid>
+
+
+
+</Window>
